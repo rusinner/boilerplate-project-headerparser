@@ -22,7 +22,11 @@ app.get("/", function (req, res) {
 // your first API endpoint...
 app.get("/api/:whoami", function (req, res) {
   const { whoami } = req.params;
-  res.json({ greeting: "hello API" });
+  res.json({
+    ipaddress: req.address,
+    language: req.language,
+    software: req.software,
+  });
 });
 
 // listen for requests :)
