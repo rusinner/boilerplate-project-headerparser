@@ -20,13 +20,14 @@ app.get("/", function (req, res) {
 });
 
 // your first API endpoint...
-app.get("/api/:whoami", function (req, res) {
-  const { whoami } = req.params;
-  res.json({
-    ipaddress: req.address,
-    language: req.language,
-    software: req.software,
-  });
+let responseObject = {};
+app.enable("trust proxy");
+app.get("/api/whoami", function (req, res) {
+  responseObject["ipaddress"] = req.ip;
+  responseObject["language"] = req.get("Accept-Language");
+  responseObject["software"] = req.get("User-Agent");
+
+  res.json(responseObject);
 });
 
 // listen for requests :)
