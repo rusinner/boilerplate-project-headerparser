@@ -20,6 +20,12 @@ app.get("/", function (req, res) {
 });
 
 // your first API endpoint...
+
+// listen for requests :)
+var listener = app.listen(process.env.PORT || 3000, function () {
+  console.log("Your app is listening on port " + listener.address().port);
+});
+
 let responseObject = {};
 app.enable("trust proxy");
 app.get("/api/whoami", function (req, res) {
@@ -28,9 +34,4 @@ app.get("/api/whoami", function (req, res) {
   responseObject["software"] = req.get("User-Agent");
 
   res.json(responseObject);
-});
-
-// listen for requests :)
-var listener = app.listen(process.env.PORT || 3000, function () {
-  console.log("Your app is listening on port " + listener.address().port);
 });
